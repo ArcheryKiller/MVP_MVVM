@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">MVP_MVVM</string>
+    <string name="Counter_1">Счетчик 1</string>
+    <string name="def_counter">0</string>
+    <string name="Counter_3">Счетчик 3</string>
+    <string name="Counter_2">Счетчик 2</string>
 </resources>
