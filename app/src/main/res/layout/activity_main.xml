@@ -4,43 +4,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center_horizontal"
-    android:padding="16dp"
     android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/tv1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/Counter_1" />
-
-    <Button
-        android:id="@+id/btnCounter1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/def_counter" />
-
-    <TextView
-        android:id="@+id/tv2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/Counter_2" />
-
-    <Button
-        android:id="@+id/btnCounter2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/def_counter" />
-
-    <TextView
-        android:id="@+id/tv3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/Counter_3" />
-
-    <Button
-        android:id="@+id/btnCounter3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/def_counter" />
+    <FrameLayout
+        android:id="@+id/container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 
 </LinearLayout>
