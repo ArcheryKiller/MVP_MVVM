@@ -1,42 +1,40 @@
 package pavel.ivanov.mvp_mvvm
 
 import android.os.Bundle
-import android.view.View
-import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.github.terrakok.cicerone.androidx.AppNavigator
+import moxy.MvpAppCompatActivity
+import moxy.ktx.moxyPresenter
 import pavel.ivanov.mvp_mvvm.databinding.ActivityMainBinding
-import java.lang.IllegalArgumentException
 
 
-class MainActivity : AppCompatActivity(), pavel.ivanov.mvp_mvvm.View {
+class MainActivity : MvpAppCompatActivity(), View {
     private lateinit var binding: ActivityMainBinding
-
-    private val presenter = Presenter(this)
+    private val presenter by moxyPresenter { Presenter(App.instance.router, AndroidScreens()) }
+    val navigator = AppNavigator(this, R.id.container)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
-        val listener = View.OnClickListener {
-            val current = when (it.id) {
-                R.id.btnCounter1 -> ButtonType.BUTTON1
-                R.id.btnCounter2 -> ButtonType.BUTTON2
-                R.id.btnCounter3 -> ButtonType.BUTTON3
-                else -> throw IllegalArgumentException()
-            }
-            presenter.counterClick(current)
-        }
-
-        binding.btnCounter1.setOnClickListener(listener)
-        binding.btnCounter2.setOnClickListener(listener)
-        binding.btnCounter3.setOnClickListener(listener)
     }
 
-    override fun setButtonText(index: Int, text: String) {
-        when (index) {
-            0 -> binding.btnCounter1.text = text
-            1 -> binding.btnCounter2.text = text
-            2 -> binding.btnCounter3.text = text
+    override fun onResumeFragments() {
+        super.onResumeFragments()
+        App.instance.navigatorHolder.setNavigator(navigator)
+    }
+
+    override fun onPause() {
+        super.onPause()
+        App.instance.navigatorHolder.removeNavigator()
+    }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        supportFragmentManager.fragments.forEach {
+            if (it is BackButtonListener && it.backPressed())
+                return
         }
+        presenter.backClicked()
     }
 }
