@@ -10,7 +10,7 @@ import moxy.MvpAppCompatFragment
 import moxy.ktx.moxyPresenter
 import pavel.ivanov.mvp_mvvm.*
 import pavel.ivanov.mvp_mvvm.databinding.FragmentUsersBinding
-import pavel.ivanov.mvp_mvvm.domain.GithubUsersRepository
+import pavel.ivanov.mvp_mvvm.domain.users.GithubUsersRepository
 import pavel.ivanov.mvp_mvvm.model.GithubUserModel
 import pavel.ivanov.mvp_mvvm.network.ApiHolder
 import pavel.ivanov.mvp_mvvm.ui.base.BackButtonListener
@@ -31,7 +31,7 @@ class UsersFragment() : MvpAppCompatFragment(), UsersView, BackButtonListener {
         get() = _binding!!
 
     private val adapter by lazy {
-        UsersAdapter(GlideImageLoader()) { presenter.onUserClicked() }
+        UsersAdapter(GlideImageLoader(), presenter::onUserClicked)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -58,6 +58,11 @@ class UsersFragment() : MvpAppCompatFragment(), UsersView, BackButtonListener {
     override fun showError(message: String?) {
         Toast.makeText(requireContext(), message.orEmpty(), Toast.LENGTH_SHORT)
             .show()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding = null
     }
 
     companion object {

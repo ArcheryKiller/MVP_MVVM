@@ -4,7 +4,9 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/arche/Desktop/GeekBrains/HomeWork/Quarter III/app/src/main/res/layout/activity_main.xml" value="0.121875" />
+        <entry key="..\:/Users/arche/Desktop/GeekBrains/HomeWork/Quarter III/app/src/main/res/layout/fragment_repos.xml" value="0.2421875" />
         <entry key="..\:/Users/arche/Desktop/GeekBrains/HomeWork/Quarter III/app/src/main/res/layout/fragment_users.xml" value="0.2421875" />
+        <entry key="..\:/Users/arche/Desktop/GeekBrains/HomeWork/Quarter III/app/src/main/res/layout/item_repos.xml" value="0.2421875" />
         <entry key="..\:/Users/arche/Desktop/GeekBrains/HomeWork/Quarter III/app/src/main/res/layout/user.xml" value="0.2421875" />
       </map>
     </option>

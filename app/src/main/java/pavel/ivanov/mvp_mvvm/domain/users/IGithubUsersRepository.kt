@@ -1,4 +1,4 @@
-package pavel.ivanov.mvp_mvvm.domain
+package pavel.ivanov.mvp_mvvm.domain.users
 
 import io.reactivex.rxjava3.core.Single
 import pavel.ivanov.mvp_mvvm.model.GithubUserModel
