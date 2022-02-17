@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import pavel.ivanov.mvp_mvvm.databinding.ItemUserBinding
-import pavel.ivanov.mvp_mvvm.model.GithubUserModel
+import pavel.ivanov.mvp_mvvm.domain.model.GithubUserModel
 import pavel.ivanov.mvp_mvvm.ui.base.ImageLoader
 
 

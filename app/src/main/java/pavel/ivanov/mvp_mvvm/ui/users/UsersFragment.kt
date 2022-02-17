@@ -11,8 +11,9 @@ import moxy.ktx.moxyPresenter
 import pavel.ivanov.mvp_mvvm.*
 import pavel.ivanov.mvp_mvvm.databinding.FragmentUsersBinding
 import pavel.ivanov.mvp_mvvm.domain.users.GithubUsersRepository
-import pavel.ivanov.mvp_mvvm.model.GithubUserModel
+import pavel.ivanov.mvp_mvvm.domain.model.GithubUserModel
 import pavel.ivanov.mvp_mvvm.network.ApiHolder
+import pavel.ivanov.mvp_mvvm.network.NetworkStatus
 import pavel.ivanov.mvp_mvvm.ui.base.BackButtonListener
 import pavel.ivanov.mvp_mvvm.ui.base.GlideImageLoader
 import pavel.ivanov.mvp_mvvm.ui.users.adapter.UsersAdapter
@@ -22,7 +23,11 @@ class UsersFragment() : MvpAppCompatFragment(), UsersView, BackButtonListener {
     private val presenter by moxyPresenter {
         UsersPresenter(
             App.instance.router,
-            GithubUsersRepository(ApiHolder.githubApiService)
+            GithubUsersRepository(
+                ApiHolder.githubApiService,
+                App.instance.database.userDao,
+                NetworkStatus(requireContext())
+            )
         )
     }
 

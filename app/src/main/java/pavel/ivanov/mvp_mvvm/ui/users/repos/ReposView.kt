@@ -2,7 +2,7 @@ package pavel.ivanov.mvp_mvvm.ui.users.repos
 
 import moxy.MvpView
 import moxy.viewstate.strategy.alias.AddToEndSingle
-import pavel.ivanov.mvp_mvvm.model.GithubRepoModel
+import pavel.ivanov.mvp_mvvm.domain.model.GithubRepoModel
 
 interface ReposView : MvpView {
 
