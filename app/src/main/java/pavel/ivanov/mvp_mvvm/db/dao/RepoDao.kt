@@ -9,9 +9,16 @@ import pavel.ivanov.mvp_mvvm.db.entity.GithubRepoEntity
 
 @Dao
 interface RepoDao {
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insert(repos: List<GithubRepoEntity>)
 
-    @Query("SELECT * FROM GithubRepoEntity WHERE userId = :userId")
-    fun getAll(userId: Long): Single<List<GithubRepoEntity>>
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun insert(user: GithubRepoEntity)
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun insert(users: List<GithubRepoEntity>)
+
+    @Query("SELECT * FROM GithubRepoEntity")
+    fun getAll(): List<GithubRepoEntity>
+
+    @Query("SELECT * FROM GithubRepoEntity WHERE id = :userId")
+    fun getByUserId(userId: Long): List<GithubRepoEntity>
 }

@@ -3,6 +3,7 @@ package pavel.ivanov.mvp_mvvm.db.entity
 import androidx.room.Entity
 import androidx.room.ForeignKey
 import androidx.room.PrimaryKey
+import com.google.gson.annotations.Expose
 
 @Entity(
     foreignKeys = [
@@ -15,7 +16,15 @@ import androidx.room.PrimaryKey
     ]
 )
 data class GithubRepoEntity (
-    @PrimaryKey val id: Long,
-    val name: String,
-    val userId: Long,
+    @Expose
+    val id: Long,
+
+    @Expose
+    val login: String,
+
+    @Expose
+    val avatarUrl: String? = null,
+
+    @Expose
+    val reposUrl: String? = null,
 )

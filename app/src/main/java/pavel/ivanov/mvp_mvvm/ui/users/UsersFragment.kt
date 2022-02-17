@@ -10,6 +10,7 @@ import moxy.MvpAppCompatFragment
 import moxy.ktx.moxyPresenter
 import pavel.ivanov.mvp_mvvm.*
 import pavel.ivanov.mvp_mvvm.databinding.FragmentUsersBinding
+import pavel.ivanov.mvp_mvvm.domain.cache.RoomGithubUsersCache
 import pavel.ivanov.mvp_mvvm.domain.users.GithubUsersRepository
 import pavel.ivanov.mvp_mvvm.domain.model.GithubUserModel
 import pavel.ivanov.mvp_mvvm.network.ApiHolder
@@ -20,13 +21,12 @@ import pavel.ivanov.mvp_mvvm.ui.users.adapter.UsersAdapter
 
 class UsersFragment() : MvpAppCompatFragment(), UsersView, BackButtonListener {
 
+    private val status by lazy { NetworkStatus(requireContext().applicationContext) }
     private val presenter by moxyPresenter {
         UsersPresenter(
             App.instance.router,
             GithubUsersRepository(
-                ApiHolder.githubApiService,
-                App.instance.database.userDao,
-                NetworkStatus(requireContext())
+                RoomGithubUsersCache(status)
             )
         )
     }
