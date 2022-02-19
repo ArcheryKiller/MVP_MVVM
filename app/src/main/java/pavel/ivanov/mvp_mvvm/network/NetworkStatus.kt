@@ -5,30 +5,36 @@ import android.net.ConnectivityManager
 import android.net.Network
 import android.net.NetworkRequest
 import androidx.core.content.getSystemService
-import io.reactivex.rxjava3.subjects.PublishSubject
+import io.reactivex.rxjava3.core.Observable
+import io.reactivex.rxjava3.subjects.BehaviorSubject
 
 class NetworkStatus(context: Context) {
 
     private val connectivityManager = context.getSystemService<ConnectivityManager>()!!
-    private val request = NetworkRequest.Builder().build()
+    private val networkStatusSubject: BehaviorSubject<Boolean> = BehaviorSubject.create()
 
-    val networkStatusSubject = PublishSubject.create<Boolean>()
+    fun getNetworkSubject(): Observable<Boolean> {
+        return networkStatusSubject
+    }
+
+    fun isOnline() = networkStatusSubject.value ?: false
 
     init {
-        networkStatusSubject.onNext(false)
+        val request = NetworkRequest.Builder().build()
 
         connectivityManager.registerNetworkCallback(request, object : ConnectivityManager.NetworkCallback() {
+            /** Сеть есть уже сейчас */
             override fun onAvailable(network: Network) {
                 networkStatusSubject.onNext(true)
             }
 
+            /** Сеть потеряна */
             override fun onLost(network: Network) {
-                super.onLost(network)
                 networkStatusSubject.onNext(false)
             }
 
+            /** Сеть не обнаружена после запроса */
             override fun onUnavailable() {
-                super.onUnavailable()
                 networkStatusSubject.onNext(false)
             }
         })

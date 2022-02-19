@@ -1,8 +1,8 @@
 package pavel.ivanov.mvp_mvvm.network
 
 import io.reactivex.rxjava3.core.Single
-import pavel.ivanov.mvp_mvvm.model.GithubRepoModel
-import pavel.ivanov.mvp_mvvm.model.GithubUserModel
+import pavel.ivanov.mvp_mvvm.domain.model.GithubRepoModel
+import pavel.ivanov.mvp_mvvm.domain.model.GithubUserModel
 import retrofit2.http.GET
 import retrofit2.http.Url
 

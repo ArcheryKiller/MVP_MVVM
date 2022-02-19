@@ -3,6 +3,7 @@ package pavel.ivanov.mvp_mvvm
 import android.app.Application
 import com.github.terrakok.cicerone.Cicerone
 import com.github.terrakok.cicerone.Router
+import pavel.ivanov.mvp_mvvm.db.GithubDatabase
 
 class App : Application() {
 
@@ -13,6 +14,10 @@ class App : Application() {
 
     val router
         get() = cicerone.router
+
+    val database by lazy {
+        GithubDatabase.getInstance(this)
+    }
 
     override fun onCreate() {
         super.onCreate()

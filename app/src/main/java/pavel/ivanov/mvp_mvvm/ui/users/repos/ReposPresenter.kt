@@ -6,8 +6,8 @@ import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.schedulers.Schedulers
 import moxy.MvpPresenter
 import pavel.ivanov.mvp_mvvm.domain.repos.IGithubReposRepository
-import pavel.ivanov.mvp_mvvm.model.GithubRepoModel
-import pavel.ivanov.mvp_mvvm.model.GithubUserModel
+import pavel.ivanov.mvp_mvvm.domain.model.GithubRepoModel
+import pavel.ivanov.mvp_mvvm.domain.model.GithubUserModel
 
 class ReposPresenter(
     private val userModel: GithubUserModel,
@@ -18,7 +18,7 @@ class ReposPresenter(
     override fun onFirstViewAttach() {
         super.onFirstViewAttach()
 
-        reposRepository.getRepos(userModel.reposUrl)
+        reposRepository.getRepos(userModel)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(

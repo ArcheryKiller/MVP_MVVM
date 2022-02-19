@@ -11,9 +11,10 @@ import moxy.ktx.moxyPresenter
 import pavel.ivanov.mvp_mvvm.App
 import pavel.ivanov.mvp_mvvm.databinding.FragmentReposBinding
 import pavel.ivanov.mvp_mvvm.domain.repos.GithubReposRepository
-import pavel.ivanov.mvp_mvvm.model.GithubRepoModel
-import pavel.ivanov.mvp_mvvm.model.GithubUserModel
+import pavel.ivanov.mvp_mvvm.domain.model.GithubRepoModel
+import pavel.ivanov.mvp_mvvm.domain.model.GithubUserModel
 import pavel.ivanov.mvp_mvvm.network.ApiHolder
+import pavel.ivanov.mvp_mvvm.network.NetworkStatus
 import pavel.ivanov.mvp_mvvm.ui.base.BackButtonListener
 import pavel.ivanov.mvp_mvvm.ui.users.repos.adapter.ReposAdapter
 
@@ -30,7 +31,10 @@ class ReposFragment : MvpAppCompatFragment(), ReposView, BackButtonListener {
     private val presenter by moxyPresenter {
         ReposPresenter(
             userModel,
-            GithubReposRepository(ApiHolder.githubApiService),
+            GithubReposRepository(ApiHolder.githubApiService,
+                App.instance.database.reposDao,
+                NetworkStatus(requireContext())
+            ),
             App.instance.router,
             )
     }
