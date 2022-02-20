@@ -8,23 +8,17 @@ import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import moxy.MvpAppCompatFragment
 import moxy.ktx.moxyPresenter
-import pavel.ivanov.mvp_mvvm.*
+import pavel.ivanov.mvp_mvvm.App
+import pavel.ivanov.mvp_mvvm.UsersView
 import pavel.ivanov.mvp_mvvm.databinding.FragmentUsersBinding
-import pavel.ivanov.mvp_mvvm.domain.users.GithubUsersRepository
 import pavel.ivanov.mvp_mvvm.model.GithubUserModel
-import pavel.ivanov.mvp_mvvm.network.ApiHolder
 import pavel.ivanov.mvp_mvvm.ui.base.BackButtonListener
 import pavel.ivanov.mvp_mvvm.ui.base.GlideImageLoader
 import pavel.ivanov.mvp_mvvm.ui.users.adapter.UsersAdapter
 
-class UsersFragment() : MvpAppCompatFragment(), UsersView, BackButtonListener {
+class UsersFragment : MvpAppCompatFragment(), UsersView, BackButtonListener {
 
-    private val presenter by moxyPresenter {
-        UsersPresenter(
-            App.instance.router,
-            GithubUsersRepository(ApiHolder.githubApiService)
-        )
-    }
+    private val presenter by moxyPresenter { App.instance.appComponent.provideUsersPresenter() }
 
     private var _binding: FragmentUsersBinding? = null
     private val binding
@@ -66,8 +60,6 @@ class UsersFragment() : MvpAppCompatFragment(), UsersView, BackButtonListener {
     }
 
     companion object {
-
-        private const val KEY_INIT_PARAMS = "KEY_INIT_PARAMS"
 
         fun newInstance(): UsersFragment {
             return UsersFragment()

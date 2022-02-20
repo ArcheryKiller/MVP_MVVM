@@ -1,4 +1,4 @@
-package pavel.ivanov.mvp_mvvm.model
+package pavel.ivanov.mvp_mvvm.domain.model
 
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName

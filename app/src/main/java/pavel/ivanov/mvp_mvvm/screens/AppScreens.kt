@@ -5,13 +5,19 @@ import pavel.ivanov.mvp_mvvm.model.GithubUserModel
 import pavel.ivanov.mvp_mvvm.ui.users.UsersFragment
 import pavel.ivanov.mvp_mvvm.ui.users.repos.ReposFragment
 
-object AppScreens {
+interface IScreens {
 
-    fun usersScreen() = FragmentScreen {
+    fun usersScreen(): FragmentScreen
+    fun reposScreen(user: GithubUserModel): FragmentScreen
+}
+
+class AppScreens : IScreens {
+
+    override fun usersScreen() = FragmentScreen {
         UsersFragment.newInstance()
     }
 
-    fun reposScreen(user: GithubUserModel) = FragmentScreen {
+    override fun reposScreen(user: GithubUserModel) = FragmentScreen {
         ReposFragment.newInstance(user)
     }
 }

@@ -21,10 +21,10 @@ class ReposAdapter(
     }
 
     inner class RepoViewHolder(private val vb: ItemReposBinding) : RecyclerView.ViewHolder(vb.root) {
+
         fun bind(repo: GithubRepoModel) {
-            vb.root.setOnClickListener { itemClickListener(repo)
+            vb.root.setOnClickListener { itemClickListener(repo) }
             vb.tvRepoName.text = repo.name
-            }
         }
     }
 }
