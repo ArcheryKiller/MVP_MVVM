@@ -10,36 +10,30 @@ import moxy.MvpAppCompatFragment
 import moxy.ktx.moxyPresenter
 import pavel.ivanov.mvp_mvvm.App
 import pavel.ivanov.mvp_mvvm.databinding.FragmentReposBinding
-import pavel.ivanov.mvp_mvvm.domain.repos.GithubReposRepository
 import pavel.ivanov.mvp_mvvm.model.GithubRepoModel
 import pavel.ivanov.mvp_mvvm.model.GithubUserModel
-import pavel.ivanov.mvp_mvvm.network.ApiHolder
 import pavel.ivanov.mvp_mvvm.ui.base.BackButtonListener
 import pavel.ivanov.mvp_mvvm.ui.users.repos.adapter.ReposAdapter
 
 class ReposFragment : MvpAppCompatFragment(), ReposView, BackButtonListener {
 
-    private var _binding: FragmentReposBinding? = null
-    private val binding: FragmentReposBinding get() = _binding!!
-    private val adapter by lazy {
-        ReposAdapter(presenter::onItemClicked)
-    }
     private val userModel by lazy {
         requireArguments().getParcelable<GithubUserModel>(KEY_USER_MODEL)!!
     }
+
+    private var _binding: FragmentReposBinding? = null
+    private val binding: FragmentReposBinding
+        get() = _binding!!
+
     private val presenter by moxyPresenter {
-        ReposPresenter(
-            userModel,
-            GithubReposRepository(ApiHolder.githubApiService),
-            App.instance.router,
-            )
+        App.instance.appComponent.provideReposPresenterFactory().presenter(userModel)
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
+    private val adapter by lazy {
+        ReposAdapter(presenter::onItemClicked)
+    }
+
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         _binding = FragmentReposBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -49,6 +43,10 @@ class ReposFragment : MvpAppCompatFragment(), ReposView, BackButtonListener {
 
         binding.reposRecycler.layoutManager = LinearLayoutManager(requireContext())
         binding.reposRecycler.adapter = adapter
+    }
+
+    override fun showRepos(repos: List<GithubRepoModel>?) {
+        adapter.submitList(repos)
     }
 
     override fun backPressed(): Boolean {
@@ -62,6 +60,7 @@ class ReposFragment : MvpAppCompatFragment(), ReposView, BackButtonListener {
     }
 
     companion object {
+
         private const val KEY_USER_MODEL = "KEY_USER_MODEL"
 
         fun newInstance(user: GithubUserModel): ReposFragment {
@@ -69,9 +68,5 @@ class ReposFragment : MvpAppCompatFragment(), ReposView, BackButtonListener {
                 arguments = bundleOf(KEY_USER_MODEL to user)
             }
         }
-    }
-
-    override fun showRepos(repos: List<GithubRepoModel>?) {
-        adapter.submitList(repos)
     }
 }

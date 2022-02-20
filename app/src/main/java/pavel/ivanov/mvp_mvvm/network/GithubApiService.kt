@@ -11,6 +11,6 @@ interface GithubApiService {
     @GET("/users")
     fun getUsers(): Single<List<GithubUserModel>>
 
-    @GET()
+    @GET
     fun getRepos(@Url reposUrl: String): Single<List<GithubRepoModel>>
 }

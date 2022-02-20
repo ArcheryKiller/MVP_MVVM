@@ -1,18 +1,18 @@
 package pavel.ivanov.mvp_mvvm
 
 import android.app.Application
-import com.github.terrakok.cicerone.Cicerone
-import com.github.terrakok.cicerone.Router
+import pavel.ivanov.mvp_mvvm.di.modules.ContextModule
+import pavel.ivanov.mvp_mvvm.di.component.DaggerAppComponent
+
 
 class App : Application() {
 
-    private val cicerone: Cicerone<Router> by lazy { Cicerone.create() }
+    val appComponent by lazy {
 
-    val navigationHolder
-        get() = cicerone.getNavigatorHolder()
-
-    val router
-        get() = cicerone.router
+        DaggerAppComponent.builder()
+            .contextModule(ContextModule(this))
+            .build()
+    }
 
     override fun onCreate() {
         super.onCreate()

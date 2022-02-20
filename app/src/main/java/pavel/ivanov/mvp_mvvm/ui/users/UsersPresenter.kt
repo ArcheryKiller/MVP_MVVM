@@ -7,11 +7,13 @@ import moxy.MvpPresenter
 import pavel.ivanov.mvp_mvvm.UsersView
 import pavel.ivanov.mvp_mvvm.domain.users.IGithubUsersRepository
 import pavel.ivanov.mvp_mvvm.model.GithubUserModel
-import pavel.ivanov.mvp_mvvm.screens.AppScreens
+import pavel.ivanov.mvp_mvvm.screens.IScreens
+import javax.inject.Inject
 
-class UsersPresenter(
-    private val router: Router,
+class UsersPresenter @Inject constructor(
     private val usersRepository: IGithubUsersRepository,
+    private val router: Router,
+    private val screens: IScreens,
 ) : MvpPresenter<UsersView>() {
 
     override fun onFirstViewAttach() {
@@ -39,6 +41,6 @@ class UsersPresenter(
     }
 
     fun onUserClicked(githubUserModel: GithubUserModel) {
-        router.navigateTo(AppScreens.reposScreen(githubUserModel))
+        router.navigateTo(screens.reposScreen(githubUserModel))
     }
 }
