@@ -1,5 +1,7 @@
 package pavel.ivanov.mvp_mvvm.ui.main
 
+import android.os.Bundle
+import android.os.PersistableBundle
 import com.github.terrakok.cicerone.androidx.AppNavigator
 import moxy.MvpAppCompatActivity
 import moxy.ktx.moxyPresenter
@@ -13,6 +15,7 @@ class MainActivity : MvpAppCompatActivity(R.layout.activity_main), MainView {
     private val navigator = AppNavigator(this, R.id.container)
 
     private val presenter by moxyPresenter { MainPresenter(App.instance.router) }
+
 
     override fun onResumeFragments() {
         super.onResumeFragments()
