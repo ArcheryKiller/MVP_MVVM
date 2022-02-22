@@ -21,7 +21,6 @@ class ReposPresenter @AssistedInject constructor(
 
     override fun onFirstViewAttach() {
         super.onFirstViewAttach()
-        App.instance.appComponent.inject(this)
 
         reposRepository.getRepos(userModel)
             .subscribeOn(Schedulers.io())
@@ -37,8 +36,12 @@ class ReposPresenter @AssistedInject constructor(
 
     }
 
-    fun onItemClicked(repo: GithubRepoModel) {
+    override fun onDestroy() {
+        super.onDestroy()
+        App.instance.destroyRepoScope()
+    }
 
+    fun onItemClicked(repo: GithubRepoModel) {
     }
 
     fun backPressed(): Boolean {
