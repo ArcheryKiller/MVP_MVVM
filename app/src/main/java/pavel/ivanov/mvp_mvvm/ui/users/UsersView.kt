@@ -1,11 +1,11 @@
-package pavel.ivanov.mvp_mvvm
+package pavel.ivanov.mvp_mvvm.ui.users
 
 import moxy.MvpView
 import moxy.viewstate.strategy.alias.AddToEndSingle
 import moxy.viewstate.strategy.alias.Skip
 import pavel.ivanov.mvp_mvvm.model.GithubUserModel
 
-interface UsersView : MvpView {
+interface  UsersView : MvpView {
 
     @AddToEndSingle
     fun updateList(users: List<GithubUserModel>)
