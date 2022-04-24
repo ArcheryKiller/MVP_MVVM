@@ -9,7 +9,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import moxy.MvpAppCompatFragment
 import moxy.ktx.moxyPresenter
 import pavel.ivanov.mvp_mvvm.App
-import pavel.ivanov.mvp_mvvm.UsersView
 import pavel.ivanov.mvp_mvvm.databinding.FragmentUsersBinding
 import pavel.ivanov.mvp_mvvm.model.GithubUserModel
 import pavel.ivanov.mvp_mvvm.ui.base.BackButtonListener

@@ -5,7 +5,6 @@ import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.schedulers.Schedulers
 import moxy.MvpPresenter
 import pavel.ivanov.mvp_mvvm.App
-import pavel.ivanov.mvp_mvvm.UsersView
 import pavel.ivanov.mvp_mvvm.domain.users.IGithubUsersRepository
 import pavel.ivanov.mvp_mvvm.model.GithubUserModel
 import pavel.ivanov.mvp_mvvm.screens.IScreens
